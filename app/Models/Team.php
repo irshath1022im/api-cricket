@@ -16,8 +16,10 @@ class Team extends Model
        return  $this->hasMany(Players::class);
     }
 
-    public function match()
+    public function matches()
     {
-        return $this->belongsTo(Match::class);
+        return $this->belongsToMany(Match::class, 'teams','team_one_id','opponent_id');
     }
+
+
 }

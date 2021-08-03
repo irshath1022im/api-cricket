@@ -18,6 +18,7 @@ class CreateMatchesTable extends Migration
             $table->string('date');
             $table->unsignedBigInteger('team_one_id');
             $table->unsignedBigInteger('oppenent_team');
+            $table->string('status');
 
             $table->foreign('team_one_id')->references('id')->on('teams');
             $table->foreign('oppenent_team')->references('id')->on('teams');

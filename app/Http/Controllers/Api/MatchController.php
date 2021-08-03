@@ -16,10 +16,15 @@ class MatchController extends Controller
     public function index()
     {
         //
-        $result = Match::with('teams')->get();
+        // $result = Match::join('teams', 'teams.id', '=', 'matches.team_one_id')
+        //                 ->select('matches.*', 'teams.*')
+        //                 ->get();
+
+        $result = Match::with(['team1', 'team2'])->get();
+
        return response()->json($result);
 
-        
+
     }
 
     /**
@@ -35,6 +40,7 @@ class MatchController extends Controller
             'date' => 'required',
             'team_one_id' => 'required',
             'oppenent_team' => 'required',
+            'status' => 'required',
             'remark' => ''
         ]);
 
@@ -54,6 +60,10 @@ class MatchController extends Controller
     public function show($id)
     {
         //
+
+        $result = Match::with(['team1', 'team2'])->findOrFail($id);
+
+        return response()->json($result);
     }
 
     /**
@@ -66,6 +76,18 @@ class MatchController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $validatedData = $request->validate([
+            'date' => 'required',
+            'team_one_id' => 'required',
+            'oppenent_team' => 'required',
+            'status' => 'required',
+            'remark' => ''
+        ]);
+
+        $result = Match::find($id)->update($validatedData);
+
+        return response()->json($result);
     }
 
     /**
