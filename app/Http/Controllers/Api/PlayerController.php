@@ -17,9 +17,9 @@ class PlayerController extends Controller
     public function index()
     {
         //
-        $result = Players::with('team')->get();
+        $result = Players::with('team')->paginate(2);
 
- 
+
 
         return response()->json($result);
     }
