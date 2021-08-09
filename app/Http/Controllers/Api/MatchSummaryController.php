@@ -21,7 +21,7 @@ class MatchSummaryController extends Controller
         //
 
         $result = MatchSummary::with(['match' => function($query){
-            return $query -> with('team1', 'team2', 'played_players')
+            return $query -> with('team1', 'team2')
                         ->get();
                   }])->paginate(2);
 
