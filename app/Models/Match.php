@@ -21,5 +21,22 @@ class Match extends Model
         return $this->belongsTo(Team::class,'oppenent_team');
     }
 
+    public function matchSummary()
+    {
+
+        return $this->hasOne(MatchSummary::class);
+
+    }
+
+    public function score_card()
+    {
+        return $this->hasMany(ScoreCard::class);
+    }
+
+    public function played_players()
+    {
+        return $this->hasMany(MatchPlayer::class);
+    }
+
 
 }

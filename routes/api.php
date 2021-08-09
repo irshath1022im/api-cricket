@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\MatchController;
+use App\Http\Controllers\Api\MatchSummaryController;
 use App\Http\Controllers\Api\PlayerController;
+use App\Http\Controllers\Api\Score;
 use App\Http\Controllers\Api\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +26,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('match', MatchController::class);
 Route::apiResource('team', TeamController::class);
 Route::apiResource('player', PlayerController::class);
+Route::apiResource('matchSummary', MatchSummaryController::class);
+Route::apiResource('score', Score::class);

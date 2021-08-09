@@ -22,6 +22,7 @@ class MatchController extends Controller
 
         $result = Match::with(['team1', 'team2'])->get();
 
+
        return response()->json($result);
 
 
