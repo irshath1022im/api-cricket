@@ -49,11 +49,13 @@ class ScoreCardController extends Controller
     public function show($id)
     {
         //
-        $result = ScoreCard::with(['match','scores','match_summary'])->findOrFail($id);
+        $result = ScoreCard::with(['match','scores'])->findOrFail($id);
 
-        return $result;
+        // $grouped = $result->scores->groupBy('player_id');
+
+        // return $grouped;
             // dd($result);
-        // return new ScoreCardShowResources($result);
+        return new ScoreCardShowResources($result);
     }
 
     /**

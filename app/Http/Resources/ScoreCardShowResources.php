@@ -8,13 +8,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ScoreCardShowResources extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * nsform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
-    {
+    
         // return parent::toArray($request);
         return [
             'date' => $this->match->date,
@@ -25,7 +25,6 @@ class ScoreCardShowResources extends JsonResource
             'players' =>$this->match->matchPlayers,
             'scores_count' => $this->scores->count(),
             'scores' => $this->scores,
-            'total_battingRuns' => $this->
         ];
     }
 }

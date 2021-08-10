@@ -19,5 +19,10 @@ class MatchPlayer extends Model
         return $this->belongsTo(Players::class);
     }
 
+    public function scores()
+    {
+        return $this->hasMany(Score::class, 'player_id', 'player_id');
+    }
+
 
 }
