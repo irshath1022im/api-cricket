@@ -9,8 +9,11 @@ class MatchSummary extends Model
 {
     use HasFactory;
 
+
     public function match()
     {
         return $this->belongsTo(Match::class);
     }
+
+
 }

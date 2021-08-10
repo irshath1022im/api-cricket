@@ -62,7 +62,7 @@ class MatchController extends Controller
     {
         //
 
-        $result = Match::with(['team1', 'team2'])->findOrFail($id);
+        $result = Match::with('matchPlayers')->findOrFail($id);
 
         return response()->json($result);
     }

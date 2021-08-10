@@ -13,4 +13,11 @@ class MatchPlayer extends Model
     {
         return $this->belongsTo(Match::class);
     }
+
+    public function player()
+    {
+        return $this->belongsTo(Players::class);
+    }
+
+
 }

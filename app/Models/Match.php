@@ -33,10 +33,19 @@ class Match extends Model
         return $this->hasMany(ScoreCard::class);
     }
 
-    public function played_players()
+    public function matchPlayers()
     {
-        return $this->hasMany(MatchPlayer::class);
+        return $this->hasManyThrough(
+                Players::class,
+                MatchPlayer::class,
+                'match_id',  // Foreign key on the in match_players table
+                'id',   // Foreign key on the Players Table
+                'id', //local key on match model
+                'player_id'  // local key on the Match Player table
+            );
     }
+
+
 
 
 }

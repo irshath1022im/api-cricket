@@ -19,5 +19,20 @@ class ScoreCard extends Model
         return $this->hasMany(Score::class);
     }
 
+    public function match_summary()
+    {
+        return $this->hasOneThrough(
+                    MatchSummary::class,
+                    Match::class,
+                    'id', // Foreign key on the Match table...
+                    'match_id', // Foreign key on the MatchSummary table...
+                    'match_id', // Local key on the MatchSummary table... Laravel Thru Key
+                    'id' // Local key on the Match table...);
+
+        );
+    }
+
+
+
 
 }

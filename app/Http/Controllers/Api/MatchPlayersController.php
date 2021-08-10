@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\MatchSummaryResources;
-use App\Models\MatchSummary;
-use App\Models\Match;
-
+use App\Http\Resources\MatchPlayersResource;
+use App\Models\MatchPlayer;
 use Illuminate\Http\Request;
 
-use function App\Models\played_players;
-
-class MatchSummaryController extends Controller
+class MatchPlayersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,22 +18,7 @@ class MatchSummaryController extends Controller
     {
         //
 
-        $result = MatchSummary::with(['match' => function($query){
-            return $query -> with('team1', 'team2', 'played_players')
-                        ->get();
-                  }])->paginate(2);
-
-        // $result = Match::with(['matchSummary', 'score_card' => function($query) {
-        //         return $query -> with('scores')
-        //                      ->get();
-        // }])
-        //                 ->where('status', 'closed')
-        //                 ->get();
-
-        //    return $result;
-        // return response()->json($result);
-
-        return MatchSummaryResources::Collection($result);
+        return MatchPlayersResource::collection(MatchPlayer::get());
     }
 
     /**
@@ -49,7 +30,6 @@ class MatchSummaryController extends Controller
     public function store(Request $request)
     {
         //
-
     }
 
     /**
@@ -61,16 +41,12 @@ class MatchSummaryController extends Controller
     public function show($id)
     {
         //
+        // $result = MatchPlayer::with('player')->where('match_id', $id)->get();
+        // $result = Match::with('matchPlayers')->findOrFail($id);
 
-        $result = MatchSummary::with(['match' => function($query){
-            return $query -> with('team1', 'team2')
-                        ->get();
-                      }])->findOrFail($id);
+        $result = MatchPlayer::with('player')->where('match_id', $id)->get();
 
-                    //   return $result;
-
-        return new MatchSummaryResources($result);
-
+        return new MatchPlayersResource($result);
     }
 
     /**
@@ -95,4 +71,25 @@ class MatchSummaryController extends Controller
     {
         //
     }
+
+
+    public function getActivePlayers($matchId)
+    {
+        $result = MatchPlayer::
+                                where('match_id', $matchId)
+                                ->where('batting_status', '=', 'active')->get();
+
+        return $result;
+    }
+
+
+    public function getYetToBatPlayers($matchId)
+    {
+        $result = MatchPlayer::with('player')
+                                ->where('match_id', $matchId)
+                                ->where('batting_status', '=', 'not yet')->get();
+
+        return $result;
+    }
+
 }

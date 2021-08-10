@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Score;
+use App\Models\ScoreCard;
 
-class Score extends Controller
+class ScoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +17,8 @@ class Score extends Controller
     public function index()
     {
         //
+
+
     }
 
     /**
@@ -26,7 +30,9 @@ class Score extends Controller
     public function store(Request $request)
     {
         //
-        return response()->json($request->all());
+            $result = Score::create($request->all());
+
+        return $result;
     }
 
     /**

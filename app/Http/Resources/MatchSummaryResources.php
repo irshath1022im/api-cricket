@@ -25,13 +25,14 @@ class MatchSummaryResources extends JsonResource
 
            return [
             "id" => $this->id,
+            "match_id" => $this->match_id,
             'date' => $this->match->date,
             'status' => $this->match->status,
             'team1' => [
                 'name' => $this->match->team1->name,
                 'score' => $this->lions_scores,
                 'wickets' => $this->lions_wickets,
-                'overs' => $this->lions_over
+                'overs' => $this->lions_over,
             ],
 
             'opponent_team' => [
