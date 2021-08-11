@@ -60,11 +60,19 @@ Route::get('getBattedPlayersLogs/{match_id}', function ($id) {
 
     // return $grouped;
 
-    $result = MatchPlayer::with('player','scores')->where('match_id', $id)
+    //score card id and match id should be same
+
+    $result = MatchPlayer::with(['player','scores' => function($query) use($id){
+                            return $query->where('score_card_id', $id);
+                             }])
+                             ->where('match_id', $id)
                             ->get();
 
                             return  PlayerLogsResource::collection($result);
 
 });
 
+Route::get('getLionsPlayers', function () {
+    return Players::get();
+});
 // ->addSelect( ModelsScore::where('score_card_id', $scoreCardId))->where('batting_status', 'out')->count();

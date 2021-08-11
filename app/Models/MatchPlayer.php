@@ -9,6 +9,8 @@ class MatchPlayer extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['match_id', 'player_id'];
+
     public function played_match()
     {
         return $this->belongsTo(Match::class);

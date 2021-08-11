@@ -51,6 +51,8 @@ class ScoreCardController extends Controller
         //
         $result = ScoreCard::with(['match','scores'])->findOrFail($id);
 
+        // return $result;
+
         // $grouped = $result->scores->groupBy('player_id');
 
         // return $grouped;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Match;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ScoreCard;
 
 class MatchController extends Controller
 {
@@ -46,6 +47,13 @@ class MatchController extends Controller
         ]);
 
         $result = Match::create($validatedData);
+
+            if(isset($result->id)) {
+                ScoreCard::create([
+                    'match_id' => $result->id
+                ]);
+            }
+
 
         return response()->json($result);
 

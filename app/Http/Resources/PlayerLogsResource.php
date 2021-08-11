@@ -21,12 +21,16 @@ class PlayerLogsResource extends JsonResource
             'player_name' => $this->player->name,
             'scores' => $this->scores,
             'batting_runs' => $this->scores->sum('batting_runs'),
-            'faced_balls' => $this->scores->countBy('ball_status'),
+            'faced_balls' => [ 'balls' => $this->scores->whereIn('ball_status', ['ok', 'wk'])->count()
+            ],
+                // $this->scores->countBy('ball_status')],
             'byRuns' => $this->scores
-                        ->where('ball_status', 'ok')
+                        ->whereIn('ball_status', ['ok'])
                         ->whereIn('batting_runs', [4,6])
                         ->countBy('batting_runs'),
-          
+
+            'batting_status' => $this->scores->whereIn('batting_status', 'out')->count()
+
         ];
     }
 }

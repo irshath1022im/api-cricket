@@ -13,8 +13,8 @@ class ScoreCardShowResources extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function toArray($request)
-    
+    public function toArray($request) {
+
         // return parent::toArray($request);
         return [
             'date' => $this->match->date,
@@ -22,9 +22,16 @@ class ScoreCardShowResources extends JsonResource
             'team_01' => 'Lions CC',
             'opponent_team' => $this->match->team2->name,
             'match_status' => $this->match->status,
-            'players' =>$this->match->matchPlayers,
             'scores_count' => $this->scores->count(),
-            'scores' => $this->scores,
+            'batting_runs' => $this->scores->sum('batting_runs'),
+            'team_runs' => $this->scores->sum('team_runs'),
+            'wickets' => $this->scores->whereIn('batting_status', 'out')->count(),
+            'over' => $this->scores->sortBy([
+                ['over', 'desc']
+            ])->take(1),
+            'scores' => $this->scores->sortBy([
+                ['id', 'desc']
+            ])->take(10)
         ];
     }
 }

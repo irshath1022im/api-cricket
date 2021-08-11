@@ -18,7 +18,7 @@ class MatchPlayersController extends Controller
     {
         //
 
-        return MatchPlayersResource::collection(MatchPlayer::get());
+        return MatchPlayersResource::collection(MatchPlayer::with('player')->get());
     }
 
     /**
@@ -30,6 +30,14 @@ class MatchPlayersController extends Controller
     public function store(Request $request)
     {
         //
+
+        $result = MatchPlayer::create([
+            'match_id' => $request->match_id,
+            'player_id' => $request->player_id
+        ]);
+
+        return response()->json($result);
+
     }
 
     /**
@@ -46,7 +54,10 @@ class MatchPlayersController extends Controller
 
         $result = MatchPlayer::with('player')->where('match_id', $id)->get();
 
-        return new MatchPlayersResource($result);
+                // return $result;
+
+
+        return  MatchPlayersResource::collection($result);
     }
 
     /**

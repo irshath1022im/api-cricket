@@ -14,6 +14,12 @@ class MatchPlayersResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        // return parent::toArray($request);
+
+        return [
+            'id' => $this->player_id,
+            'name' => $this->player->name,
+            'thumbnail' => $this->player->url
+        ];
     }
 }

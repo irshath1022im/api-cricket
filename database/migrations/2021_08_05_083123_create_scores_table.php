@@ -15,17 +15,20 @@ class CreateScoresTable extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
-            $table->foreign('score_card_id')->references('id')->on('score_cards');
             $table->string('ball_status');
             $table->string('batting_status');
-            $table->integer('over');
-            $table->string('bowler');
-            $table->foreign('player_id')->references('id')->on('players');
+            $table->unsignedBigInteger('opponent_player_id');
+            $table->decimal('over', $precision = 9, $scale=1);
             $table->integer('batting_runs');
             $table->integer('team_runs');
             $table->boolean('over_ended');
             $table->unsignedBigInteger('player_id');
             $table->unsignedBigInteger('score_card_id')->index();
+
+            $table->foreign('score_card_id')->references('id')->on('score_cards');
+            $table->foreign('player_id')->references('id')->on('players');
+            $table->foreign('opponent_player_id')->references('id')->on('opponent_players');
+
             $table->timestamps();
         });
     }

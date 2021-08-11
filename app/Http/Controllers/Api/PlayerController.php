@@ -18,9 +18,6 @@ class PlayerController extends Controller
     {
         //
         $result = Players::with('team')->paginate(2);
-
-
-
         return response()->json($result);
     }
 
@@ -123,4 +120,6 @@ class PlayerController extends Controller
     {
         //
     }
+
+
 }

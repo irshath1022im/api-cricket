@@ -17,7 +17,7 @@ class CreateMatchPlayersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('match_id');
             $table->unsignedBigInteger('player_id');
-
+            $table->string('batting_status')->default('not yet');
             $table->foreign('match_id')->references('id')->on('match');
             $table->foreign('player_id')->references('id')->on('players');
             $table->timestamps();
