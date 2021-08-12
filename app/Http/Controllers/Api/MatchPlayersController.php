@@ -52,7 +52,9 @@ class MatchPlayersController extends Controller
         // $result = MatchPlayer::with('player')->where('match_id', $id)->get();
         // $result = Match::with('matchPlayers')->findOrFail($id);
 
-        $result = MatchPlayer::with('player')->where('match_id', $id)->get();
+        $result = MatchPlayer::with('player', 'scores')
+                                ->where('match_id', $id)
+                                ->get();
 
                 // return $result;
 
@@ -70,6 +72,14 @@ class MatchPlayersController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $data = [
+            'match_id' => $request->match_id,
+            'player_id' => $request->player_id,
+            'batting_status' => $request->batting_status
+        ];
+
+        return MatchPlayer::findOrFail($id)->update($data);
     }
 
     /**

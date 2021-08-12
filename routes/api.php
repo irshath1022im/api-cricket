@@ -53,7 +53,10 @@ Route::get('getTotalScores/{scoreCardId}', function($scoreCardId){
 });
 
 
-Route::get('getBattedPlayersLogs/{match_id}', function ($id) {
+Route::get('getBattedPlayersLogs/{score_card_id}', function ($id) {
+
+    // return $id;
+
     // $result = ScoreCard::with(['scores'])->findOrFail($id);
 
     // $grouped = $result->scores->groupBy('player_id');

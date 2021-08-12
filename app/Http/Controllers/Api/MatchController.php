@@ -21,13 +21,13 @@ class MatchController extends Controller
         //                 ->select('matches.*', 'teams.*')
         //                 ->get();
 
-        $result = Match::with(['team1', 'team2'])->get();
+        $result = Match::with(['team1', 'team2','score_card'])->get();
 
 
        return response()->json($result);
 
 
-    }
+}
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +35,8 @@ class MatchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+     public function store(Request $request)
     {
         //
         $validatedData = $request->validate([

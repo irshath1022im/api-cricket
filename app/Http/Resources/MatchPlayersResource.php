@@ -17,9 +17,12 @@ class MatchPlayersResource extends JsonResource
         // return parent::toArray($request);
 
         return [
-            'id' => $this->player_id,
+            'line_id' => $this->id,
+            'player_id' => $this->player_id,
             'name' => $this->player->name,
-            'thumbnail' => $this->player->url
+            'thumbnail' => $this->player->url,
+            'batting_status' => $this->batting_status,
+            'player_scores' => $this->scores->count()
         ];
     }
 }

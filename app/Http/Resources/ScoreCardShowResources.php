@@ -19,6 +19,7 @@ class ScoreCardShowResources extends JsonResource
         return [
             'date' => $this->match->date,
             'match_id' => $this->match_id,
+            'score_card_id' => $this->id,
             'team_01' => 'Lions CC',
             'opponent_team' => $this->match->team2->name,
             'match_status' => $this->match->status,
